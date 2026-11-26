@@ -10,3 +10,18 @@ services:
       MODEL_PATH: /models/model.pkl
     volumes:
       - ./models:/models
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: airbnb-api:latest
+    environment:
+      MODEL_PATH: /models/model.pkl
+    volumes:
+      - ./models:/models:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      train:
+        condition: service_completed_successfully
