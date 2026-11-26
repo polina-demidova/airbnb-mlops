@@ -47,3 +47,40 @@ jupyter lab
 | Random Forest | 94.824 | 379.137 | 0.185 |
 
 Random Forest снижает MAE на 36,6% и RMSE на 11,0% относительно Baseline.
+
+
+## 3. Model Pipeline and Serialization
+
+В ноутбуке `02_pipeline.ipynb` реализован единый sklearn Pipeline,
+объединяющий предобработку данных и модель машинного обучения.
+
+### Pipeline
+
+- SimpleImputer — обработка пропущенных значений.
+- OneHotEncoder — кодирование категориальных признаков.
+- ColumnTransformer — объединение преобразований признаков.
+- RandomForestRegressor — модель из 200 деревьев.
+- TransformedTargetRegressor — логарифмирование целевой переменной
+  и обратное преобразование предсказаний.
+
+### Model evaluation
+
+| Metric | Random Forest Pipeline |
+|--------|------------------------|
+| MAE    | 96.738                 |
+| RMSE   | 382.317                |
+| R²     | 0.171                  |
+
+### Model serialization
+
+Обученный Pipeline сохранён в формате pickle (`model.pkl`).
+Размер модели составляет 198.96 МБ.
+
+Проверено совпадение предсказаний до и после сериализации,
+а также выполнение предсказания для нового объявления.
+
+Модель загружена в S3:
+
+`s3://mlops26-course-bucket/models/model.pkl`
+
+Файл модели исключён из Git с помощью `.gitignore`.
