@@ -1,0 +1,12 @@
+services:
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    image: airbnb-train:latest
+    env_file:
+      - .env
+    environment:
+      MODEL_PATH: /models/model.pkl
+    volumes:
+      - ./models:/models

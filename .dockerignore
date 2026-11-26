@@ -1,0 +1,12 @@
+.git
+.venv
+.env
+.env.*
+secretkeys.py
+__pycache__
+.ipynb_checkpoints
+*.ipynb
+*.pkl
+data/
+models/
+.DS_Store
